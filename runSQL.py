@@ -315,54 +315,76 @@ def getDepartamento():
 def encontrarIDBorde():
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE campo = -1", (columna, valor))
+    c.execute("SELECT * FROM CampoCrudo WHERE year = -1")
     rows = c.fetchall()
     return rows
 
 def getCampoCrudoByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM CampoCrudo WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
               
 def getDataByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM Data WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
               
 def getContratoByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM Contrato WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
 def getCuencaByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM Cuenca WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
               
 def getEmpresaByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM Empresa WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
               
 def getMunicipioByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM Municipio WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
               
 def getDepartamentoByValue(columna, valor):
     conn = sqlite3.connect("hackathon.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM CampoCrudo WHERE ? = ?", (columna, valor))
+    mensaje = "SELECT * FROM Departamento WHERE {} = {}".format(columna, valor)
+    c.execute(mensaje)
+    rows = c.fetchall()
+    return rows
+
+def getCampoCrudeByManyValue(lista):
+    conn = sqlite3.connect("hackathon.db")
+    c = conn.cursor()
+    mensaje = "SELECT * FROM Departamento WHERE"
+    for i in range(0, len(lista)):
+        columna = lista[i][0]
+        valor = lista[i][1]
+        m = "{} = {}".format(columna, valor)
+        mensaje= mensaje + m
+        if i < len(lista)-1:
+            mensaje = mensaje + "AND"
+    c.execute(mensaje)
     rows = c.fetchall()
     return rows
